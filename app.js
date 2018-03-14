@@ -13,7 +13,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:url', function (req, res) {
-  request(req.params.url).pipe(res);
+  if(req.params.url && req.params.url.indexOf('http') >= 0) {
+    request(req.params.url).pipe(res);
+  } else {
+    res.send('Invalid URL');
+  }
 });
 
 app.post('/', function (req, res) {
