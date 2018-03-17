@@ -42,7 +42,7 @@ app.post('/', function (req, res) {
   if (req.body && req.body.url) {
     request(encodeURIComponent(req.body.url)).pipe(res);
   } else {
-    res.send('Invalid Request, brah');
+    res.send('Invalid Request, brah' + req.body);
   }
 });
 
