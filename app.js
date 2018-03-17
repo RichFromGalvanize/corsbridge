@@ -40,7 +40,6 @@ app.get('/:url', function (req, res) {
 
 app.post('/', function (req, res) {
   if (req.body && req.body.url) {
-    res.send(req.body.url);
     request(req.body.url).pipe(res);
   } else {
     res.send('Invalid Request, brah');
