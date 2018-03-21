@@ -39,7 +39,6 @@ app.get( '/:url', function ( req, res ) {
 } );
 
 app.post( '/', function ( req, res ) {
-  console.log( req.body );
   if ( req.body && req.body.url ) {
     request( req.body.url ).pipe( res );
   } else {
@@ -48,10 +47,9 @@ app.post( '/', function ( req, res ) {
 } );
 
 app.all( '*', function ( req, res ) {
-  console.log( req.body );
   res.send( 'Invalid Request, brah' );
 } );
 
 app.listen( process.env.PORT || 3000, function () {
-  console.log( 'Example app listening!' )
+  console.log( 'Example app listening!' );
 } );
