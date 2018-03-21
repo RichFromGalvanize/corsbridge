@@ -1,55 +1,57 @@
-var express = require('express'),
+var express = require( 'express' ),
   app = express(),
-  request = require('request'),
-  fs = require('fs'),
-  bp = require('body-parser'),
-  form = fs.readFileSync(__dirname + '/form.html').toString();
+  request = require( 'request' ),
+  fs = require( 'fs' ),
+  bp = require( 'body-parser' ),
+  form = fs.readFileSync( __dirname + '/form.html' ).toString();
 
-app.use(bp.json());
+app.use( bp.json() );
 
-app.use(function (req, res, next) {
+app.use( function ( req, res, next ) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader( 'Access-Control-Allow-Origin', '*' );
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader( 'Access-Control-Allow-Methods', '*' );
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader( 'Access-Control-Allow-Headers', 'X-Requested-With,content-type' );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader( 'Access-Control-Allow-Credentials', 'true' );
 
   next();
-});
+} );
 
-app.get('/', function (req, res) {
-  res.set('Content-Type', 'text/html');
-  res.send(form);
-});
+app.get( '/', function ( req, res ) {
+  res.set( 'Content-Type', 'text/html' );
+  res.send( form );
+} );
 
-app.get('/:url', function (req, res) {
-  if (req.params.url && req.params.url.indexOf('http') >= 0) {
-    request(req.params.url).pipe(res);
+app.get( '/:url', function ( req, res ) {
+  if ( req.params.url && req.params.url.indexOf( 'http' ) >= 0 ) {
+    request( req.params.url ).pipe( res );
   } else {
-    res.send('Invalid URL');
+    res.send( 'Invalid URL' );
   }
-});
+} );
 
-app.post('/', function (req, res) {
-  if (req.body && req.body.url) {
-    request(encodeURIComponent(req.body.url)).pipe(res);
+app.post( '/', function ( req, res ) {
+  console.log( req.body );
+  if ( req.body && req.body.url ) {
+    request( req.body.url ).pipe( res );
   } else {
-    res.send('Invalid Request, brah');
+    res.send( 'Invalid Request, brah' );
   }
-});
+} );
 
-app.all('*', function (req, res) {
-  res.send('Invalid Request, brah');
-});
+app.all( '*', function ( req, res ) {
+  console.log( req.body );
+  res.send( 'Invalid Request, brah' );
+} );
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log('Example app listening!')
-});
+app.listen( process.env.PORT || 3000, function () {
+  console.log( 'Example app listening!' )
+} );
