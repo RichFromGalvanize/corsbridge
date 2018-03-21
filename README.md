@@ -1,6 +1,10 @@
 # CORS Bridge
 
+[https://corsbridge.herokuapp.com/](https://corsbridge.herokuapp.com/)
+
 CORS Bridge is a simple app meant to work as a bridge for API requests that have CORS issues. 
+
+Use the UI that is loaded when no request is made, to generate the full url for a get request, OR use the examples below to encode your URL and retrieve the data as either a GET or POST request.
 
 ## Usage Examples
 
