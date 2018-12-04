@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Methods', '*');
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, user-key, Accept');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, user-key, X-RapidAPI-Key, Accept');
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
@@ -36,7 +36,8 @@ app.get('/:url', function (req, res) {
       url: req.params.url,
       headers: {
         "user-key": req.get('user-key'),
-        "Accept": req.get('Accept')
+        "Accept": req.get('Accept'),
+        "X-RapidAPI-Key": req.get('X-RapidAPI-Key')
       }
     };
     request(options).pipe(res);
